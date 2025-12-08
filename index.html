@@ -10,8 +10,8 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #c5ebcf;
-      color: #222;
+      background-color: #BCB893;
+      color: #332C0F;
     }
 
     .container {
@@ -32,24 +32,36 @@
     .tagline {
       text-align: center;
       margin-top: 0;
+      color: #474329;
+      font-size: 0.95rem;
+    }
+
+    #nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+      display: flex;
+      gap: 20px;
+    }
+    
+    #nav ul li a {
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
       color: #555;
       font-size: 0.95rem;
+      transition: background 0.2s, color 0.2s;
     }
-
-    nav {
-      margin-top: 10px;
-      margin-bottom: 10px;
+    
+    #nav ul li.active a {
+      background: #d81b60;   /* same color as your screenshot */
+      color: white;
+      font-weight: bold;
     }
-
-    nav a {
-      margin-right: 12px;
-      text-decoration: none;
-      color: #0070c9;
-      font-size: 0.95rem;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
+    
+    #nav ul li a:hover {
+      background: #eee;
+      color: #333;
     }
 
     section {
@@ -99,7 +111,7 @@
     footer {
       text-align: center;
       font-size: 0.8rem;
-      color: #777;
+      color: #332C0F;
       margin-top: 20px;
       padding-bottom: 10px;
     }
@@ -113,12 +125,14 @@
         Advertising Major & Computer Science Minor · University of Florida
       </p>
 
-      <nav>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+      <nav id="nav">
+        <ul>
+          <li class="active"><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </nav>
     </header>
 

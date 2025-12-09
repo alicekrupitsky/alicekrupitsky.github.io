@@ -5,97 +5,130 @@
   <title>Alice Krupitsky Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* Basic page styles */
-    body {
-      font-family: garamond;
-      margin: 0;
-      padding: 0;
-      background-color: #a6b3aa;
-      color: #332C0F;
-    }
-    p {
-      font-size: 18px;
-    }
-    h2 {
-      font-size: 35px;
+    * {
+      box-sizing: border-box;
     }
 
+    body {
+      font-family: garamond, "Times New Roman", serif;
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, #b8c2bb 0, transparent 55%),
+        radial-gradient(circle at bottom right, #8f9b92 0, transparent 55%),
+        #a6b3aa;
+      color: #332C0F;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    h1, h2 {
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
 
     .container {
       max-width: 900px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 24px 18px 40px;
     }
 
     header {
       margin-bottom: 20px;
+      text-align: center;
     }
 
     h1 {
-      margin-bottom: 5px;
-      text-align: center;
-      font-size: 55px;
+      margin-bottom: 4px;
+      font-size: 52px;
+      letter-spacing: 0.04em;
     }
 
     .tagline {
-      text-align: center;
       margin-top: 0;
       color: #474329;
       font-size: 0.95rem;
     }
 
+    /* Nav */
+    #nav {
+      margin-top: 18px;
+    }
+
     #nav ul {
       list-style: none;
       padding: 0;
-      margin: 20px 0;
+      margin: 0;
       display: flex;
-      gap: 20px;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
     }
-    
+
+    #nav ul li {
+      margin: 0;
+    }
+
     #nav ul li a {
       text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 8px;
-      color: #474329;;
-      font-size: 0.95rem;
-      transition: background 0.2s, color 0.2s;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: #474329;
+      font-size: 0.92rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      transition: background 0.15s ease-out, color 0.15s ease-out, border 0.15s ease-out;
     }
-    
+
     #nav ul li.active a {
       background: #558566;
-      color: white;
+      color: #ffffff;
       font-weight: bold;
+      border-color: #446a51;
     }
-    
+
     #nav ul li a:hover {
-      background: #eee;
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(71, 67, 41, 0.25);
       color: #333;
     }
 
+    /* cards */
     section {
       background-color: #ffffff;
       border: 1px solid #ddd;
-      padding: 15px 18px;
-      margin-bottom: 15px;
-      border-radius: 4px;
+      padding: 18px 20px;
+      margin-bottom: 18px;
+      border-radius: 10px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
     }
 
     section h2 {
-      margin-top: 0;
-      font-size: 1.1rem;
+      font-size: 28px;
       border-bottom: 1px solid #eee;
       padding-bottom: 6px;
       margin-bottom: 10px;
     }
 
+    /* blocks */
     .item-title {
       font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 2px;
     }
 
     .item-meta {
       font-size: 0.9rem;
       color: #666;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     ul {
@@ -109,11 +142,16 @@
     }
 
     .skills-list li {
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     a {
       color: #368546;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
 
     footer {
@@ -123,6 +161,20 @@
       margin-top: 20px;
       padding-bottom: 10px;
     }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 40px;
+      }
+
+      section {
+        padding: 16px 16px;
+      }
+
+      p {
+        font-size: 17px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -130,7 +182,7 @@
     <header>
       <h1>Alice Krupitsky</h1>
       <p class="tagline">
-        Advertising Major & Computer Science Minor · University of Florida
+        Advertising Major &amp; Computer Science Minor · University of Florida
       </p>
 
       <nav id="nav">
@@ -152,9 +204,8 @@
         communication work together in advertising.
       </p>
       <p>
-        I manage social media for small businesses in Tampa and enjoy combining
-        content creation with basic analytics (engagement, reach, etc.).
-        I also have experience with Python, C++, JavaScript, and HTML/CSS.
+        I manage social media and marketing for a variety of small businesses and especially enjoy combining content creation
+        with data analysis. I also have experience with Python, C++, JavaScript, and HTML/CSS, and I’m always striving to learn more.
       </p>
     </section>
 
@@ -206,7 +257,8 @@
         <p class="item-title">Small Business Social Media Work</p>
         <p class="item-meta">Golden Egg Café and other local businesses</p>
         <ul>
-          <li>Test different post ideas and styles on Instagram.</li>
+          <li> Manage the @golden.eggcafe Instagram and digital platforms</li>
+          <li> Design social media graphics and promotional materials using Canva to maintain consistent brand aesthetics.</li>
           <li>Use basic metrics to understand what audiences respond to.</li>
         </ul>
       </div>
@@ -216,7 +268,7 @@
       <h2>Skills</h2>
       <ul class="skills-list">
         <li><strong>Programming:</strong> Python, C++, JavaScript, HTML/CSS</li>
-        <li><strong>Tools:</strong> Canva, basic data analysis, social media platforms</li>
+        <li><strong>Tools:</strong> Canva, Adobe Illustrator, Adobe InDesign, and Adobe Dreamweaver</li>
         <li><strong>Languages:</strong> English (native), Russian (professional)</li>
       </ul>
     </section>

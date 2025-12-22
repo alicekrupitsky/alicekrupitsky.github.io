@@ -7,11 +7,9 @@
   <link rel="icon" type="image/png" href="iconAK.png">
 
   <style>
-
     * { box-sizing: border-box; }
-    html {
-    scroll-behavior: smooth;
-    }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: garamond, "Times New Roman", serif;
@@ -20,11 +18,11 @@
       background:
         radial-gradient(circle at top left, #b8c2bb 0, transparent 55%),
         radial-gradient(circle at bottom right, #8f9b92 0, transparent 55%),
-        #a6b3aa;
+        #848c85;
       color: #332C0F;
     }
 
-    p { font-size: 17px; line-height: 1.5; }
+    p { font-size: 15px; line-height: 1.5; }
     h1, h2 { margin: 0; }
 
     h2 {
@@ -38,48 +36,62 @@
       padding: 24px 18px 40px;
     }
 
-    header {
-      margin-bottom: 20px;
+    /* HEADER */
+
+    .site-header {
+      background: #f0f0f0;
+      border-bottom: 1px solid rgba(71, 67, 41, 0.18);
+      padding: 28px 18px 22px;
+      margin-bottom: 26px;
+      backdrop-filter: blur(6px);
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
       text-align: center;
     }
 
-    h1 {
-      margin-bottom: 4px;
+    .site-title {
+      margin-bottom: 6px;
       font-size: 50px;
       letter-spacing: 0.04em;
     }
 
     .tagline {
-      margin-top: 0;
+      margin: 0;
       color: #474329;
       font-size: 1.05rem;
     }
 
-    /* Nav */
+    /* NAV */
+
     #nav { margin-top: 18px; }
 
     #nav ul {
       list-style: none;
       padding: 0;
       margin: 0;
-      display: flex;
+      display: inline-flex;
       justify-content: center;
-      gap: 18px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
     #nav ul li { margin: 0; }
 
     #nav ul li a {
+      display: inline-block;
       text-decoration: none;
-      padding: 8px 14px;
+      padding: 9px 14px;
       border-radius: 999px;
       color: #474329;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      border: 1px solid transparent;
-      transition: background 0.15s ease-out, color 0.15s ease-out, border 0.15s ease-out;
+      border: 1px solid rgba(71, 67, 41, 0.18);
+      background: rgba(255, 255, 255, 0.55);
+      transition: transform 0.12s ease-out, background 0.12s ease-out, border 0.12s ease-out;
     }
 
     #nav ul li.active a {
@@ -90,14 +102,16 @@
     }
 
     #nav ul li a:hover {
-      background: rgba(255, 255, 255, 0.6);
-      border-color: rgba(71, 67, 41, 0.25);
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(71, 67, 41, 0.28);
       color: #333;
     }
 
-    /* cards */
+    /* CARDS */
+
     section {
-      background-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.95);
       border: 1px solid #ddd;
       padding: 22px 24px;
       margin-bottom: 22px;
@@ -112,7 +126,6 @@
       margin-bottom: 10px;
     }
 
-    /* blocks */
     .item-title {
       font-weight: bold;
       font-size: 18px;
@@ -146,64 +159,66 @@
     }
 
     @media (max-width: 600px) {
-      h1 { font-size: 40px; }
-      section { padding: 16px 16px; }
-      p { font-size: 17px; }
+      .site-title { font-size: 40px; }
+      section { padding: 16px; }
+      p { font-size: 16px; }
     }
   </style>
-
-  
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <h1>Alice Krupitsky</h1>
-      <p class="tagline">
-        Advertising Major &amp; Computer Science Minor · AI Fundamentals Certificate · University of Florida
-      </p>
 
-      <nav id="nav">
-        <ul>
-          <li class="active"><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+<header class="site-header">
+  <div class="header-inner">
+    <h1 class="site-title">Alice Krupitsky</h1>
+    <p class="tagline">
+      Advertising Major &amp; Computer Science Minor · AI Fundamentals Certificate · University of Florida
+    </p>
 
-    <section id="about">
-      <h2>About</h2>
-      <p>
-Hi, I’m Alice Krupitsky, and I am a third-year student at the University of Florida studying Advertising with a minor in Computer Science and an AI Fundamentals Certificate. I’m instinctively drawn to creativity, while also deeply interested in the technology and data behind the scenes.
+    <nav id="nav" aria-label="Primary">
+      <ul>
+        <li class="active"><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      Hi, I’m Alice Krupitsky, and I am a third-year student at the University of Florida studying Advertising with a minor in Computer Science and an AI Fundamentals Certificate. I’m instinctively drawn to creativity, while also deeply interested in the technology and data behind the scenes.
+    </p>
+
+<p>
+  I grew up in a Russian household in Tampa, which naturally shaped my curiosity about culture, language, and the ways communication influences how people think and connect.
+  I’ve always loved that no two people share the exact same perspective. I see it as an opportunity to explore, learn, and better understand how meaning is created.
 </p>
 
 <p>
-I grew up in a Russian household in Tampa, which naturally shaped my curiosity about culture, language, and the ways communication influences how people think and connect.
-I’ve always loved that no two people share the exact same perspective. I see it as an opportunity to explore, learn, and better understand how meaning is created.
+  I’ve also always been a bit of a data junkie. From a young age, I was drawn to patterns and the way they line up to form trends.
+  When I was younger, I would watch fashion shows with the specific intention of identifying emerging trends.
+  Being able to analyze data using technology feels like a privilege that I’m genuinely grateful for.
 </p>
 
 <p>
-I’ve also always been a bit of a data junkie. From a young age, I was drawn to patterns and the way they line up to form trends.
-When I was younger, I would watch fashion shows with the specific intention of identifying emerging trends.
-Being able to analyze data using technology feels like a privilege that I’m genuinely grateful for.
+  Outside of work and school, my interests range from psychology, language learning, fashion (from observing to creating), philosophy, coding, graphic design, reading, writing, weight lifting, swimming, and going on runs. I’m always interested in a little bit of everything, and I don’t see that as something to outgrow.
 </p>
 
 <p>
-Outside of work and school, my interests range from psychology, language learning, fashion (from observing to creating), philosophy, coding, graphic design, writing (especially poetry), weight lifting, and going on runs. I’ve always been interested in a little bit of everything, and I don’t see that as something to outgrow.
+  My long-term goal is to build a career that blends brand strategy, content creation, and technology.
+  My advertising philosophy centers on data-driven creativity: while intuition can spark ideas, meaningful communication is strongest when the art of storytelling is supported by analytics and intentional strategy.
 </p>
+  </section>
 
-<p>
-My long-term goal is to build a career that blends brand strategy, content creation, and technology.
-My advertising philosophy centers on data-driven creativity: while intuition can spark ideas, meaningful communication is strongest when the art of storytelling is supported by analytics and intentional strategy.
-</p>
-
-
-    </section>
-
-    <section id="experience">
+  <!-- EXPERIENCE -->
+  <section id="experience">
       <h2>Experience</h2>
 
       <div>
@@ -261,7 +276,9 @@ My advertising philosophy centers on data-driven creativity: while intuition can
       </div>
     </section>
 
-    <section id="projects">
+
+  <!-- PROJECTS -->
+  <section id="projects">
       <h2>Projects</h2>
 
       <div>
@@ -285,6 +302,7 @@ My advertising philosophy centers on data-driven creativity: while intuition can
       </div>
     </section>
 
+    <!-- SKILLS -->
     <section id="skills">
       <h2>Skills</h2>
       <ul class="skills-list">
@@ -295,44 +313,48 @@ My advertising philosophy centers on data-driven creativity: while intuition can
       </ul>
     </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>
-        I’m open to internships and opportunities in advertising, digital strategy, and data-informed marketing.
-      </p>
-      <p>
-        Email: <a href="mailto:akrupitsky@ufl.edu">akrupitsky@ufl.edu</a><br>
-        LinkedIn:
-        <a href="https://www.linkedin.com/in/alicekrupitsky" target="_blank" rel="noopener">
-          linkedin.com/in/alicekrupitsky
-        </a>
-      </p>
-    </section>
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:akrupitsky@ufl.edu">akrupitsky@ufl.edu</a><br>
+       LinkedIn:
+       <a href="https://www.linkedin.com/in/alicekrupitsky" target="_blank" rel="noopener">
+       linkedin.com/in/alicekrupitsky
+       </a>
+    </p>
+  </section>
 
-    <footer>
-      © 2025 Alice Krupitsky
-    </footer>
-  </div>
-  <script>
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll("#nav ul li");
+  <footer>
+    © 2025 Alice Krupitsky
+  </footer>
 
-    function setActiveLink() {
-      let current = "";
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 140;
-        if (window.scrollY >= sectionTop) current = section.getAttribute("id");
-      });
+</div>
 
-      navLinks.forEach((li) => li.classList.remove("active"));
-      navLinks.forEach((li) => {
-        const a = li.querySelector("a");
-        if (a && a.getAttribute("href") === "#" + current) li.classList.add("active");
-      });
-    }
+<script>
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll("#nav ul li");
 
-    window.addEventListener("scroll", setActiveLink);
-    window.addEventListener("load", setActiveLink);
-  </script>
+  function setActiveLink() {
+    let current = "";
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 140;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach(li => li.classList.remove("active"));
+    navLinks.forEach(li => {
+      const a = li.querySelector("a");
+      if (a && a.getAttribute("href") === "#" + current) {
+        li.classList.add("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", setActiveLink);
+  window.addEventListener("load", setActiveLink);
+</script>
+
 </body>
 </html>

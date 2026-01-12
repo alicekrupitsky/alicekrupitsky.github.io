@@ -234,14 +234,14 @@ box-shadow: 0 3px 0 var(--green),
     }
     .bigTitle{
       text-align:center;
-      font-size: 50px;
+      font-size: 45px;
       color: var(--green2);
       letter-spacing: .10em;
       margin: 6px 0 14px;
     }
     .main-title {
       text-align:center;
-      font-size: 41px;
+      font-size: 35px;
       color: var(--green2);
       letter-spacing: .10em;
       margin: 6px 0 14px; 
@@ -463,6 +463,16 @@ a:hover{
 
       const projects = [
         {
+          title: "Florida Medical Doctor Search",
+	  meta: "Full-Stack Web App · SQL Server + C# · Dec 2025 - Jan 2026",
+	  link: "https://floridamedsearch.com/",
+ 	  bullets: [
+   	 "Built a full-stack tool that helps users find Florida doctors based on real procedural experience data",
+   	 "Supports procedure search with filtering by county or ZIP code (including radius search) for both outpatient (CPT) and inpatient 	  (ICD-10) records.",
+    	 "Designed to make complex healthcare data more accessible for people making high-stakes medical decisions."
+ 	 ],
+	},
+        {
         title:"Website for David D. Friedman",
         meta:"Frontend Development · HTML/CSS · Mar 2020",
         link:"http://www.daviddfriedman.com/",
@@ -527,10 +537,13 @@ a:hover{
                 }}>
                   <div style={{textAlign:"center", letterSpacing:".14em"}}>Quick Links</div>
                   <div style={{marginTop: 6, display:"flex", flexWrap:"wrap", gap:8, justifyContent:"center"}}>
-                    <a href="mailto:akrupitsky@ufl.edu">Email ↗</a>
-                    <span style={{opacity:.6}}>·</span>
-                    <a href="https://www.linkedin.com/in/alicekrupitsky" target="_blank" rel="noopener">LinkedIn ↗</a>
-                  </div>
+  		    <a href="mailto:akrupitsky@ufl.edu">Email ↗</a>
+  		    <span style={{opacity:.6}}>·</span>
+   		    <a href="https://www.linkedin.com/in/alicekrupitsky" target="_blank" rel="noopener">LinkedIn ↗</a>
+       		    <span style={{opacity:.6}}>·</span>
+  		    <a href="https://github.com/alicekrupitsky" target="_blank" rel="noopener">GitHub ↗</a>
+		  </div>
+
                 </div>
               </div>
             </aside>
@@ -637,10 +650,15 @@ a:hover{
                     <div className="contactText">akrupitsky@ufl.edu</div>
                   </a>
 
-                  <a className="contactCard soft" href="https://www.linkedin.com/in/alicekrupitsky" target="_blank" rel="noopener">
+                  <a className="contactCard bg" href="https://www.linkedin.com/in/alicekrupitsky" target="_blank" rel="noopener">
                     <div className="contactTitle">↗ LinkedIn</div>
                     <div className="contactText">linkedin.com/in/alicekrupitsky</div>
                   </a>
+
+		  <a className="contactCard bg" href="https://github.com/alicekrupitsky" target="_blank" rel="noopener" 				  style={{ gridColumn: "span 2", justifySelf: "center", width: "100%", maxWidth: "420px" }}>
+ 		  <div className="contactTitle">↗ GitHub</div>
+ 		  <div className="contactText">github.com/alicekrupitsky</div>
+		 </a>
                 </div>
               </Window>
 

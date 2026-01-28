@@ -18,8 +18,10 @@
       --soft: #e6fff2;
       --green: #357a4b;
       --green2:#3a7c4a;
+      --accent: #4a9960;
       --shadow: rgba(58,124,74,0.22);
       --radius: 18px;
+      --card-bg: rgba(255,255,255,0.85);
     }
 
     html { scroll-behavior: smooth; }
@@ -40,8 +42,9 @@
       color: var(--ink);
       font-family: 'VT323', monospace;
       min-height:100vh;
+      font-size: 20px;
     }
-    a{ color: var(--ink); text-decoration: underline dotted; }
+    a{ color: var(--ink); text-decoration: underline dotted; font-weight: bold; }
     a:hover{ color: var(--green2); }
 
   
@@ -59,7 +62,7 @@
       background: var(--soft);
       border: 4px solid var(--ink);
       border-radius: var(--radius);
-      box-shadow: 0 6px 0 var(--ink), 0 18px 40px var(--shadow);
+      box-shadow: 0 6px 0 var(--ink), 0 16px 40px var(--shadow);
       overflow:hidden;
       transform: translateY(10px);
       opacity: 0;
@@ -98,6 +101,16 @@
     }
     .windowBody p{
   margin: 0 0 14px;
+  line-height: 1.55;
+}
+
+.windowBody ul{
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+.windowBody li{
+  margin-bottom: 7px;
 }
 
 .windowBody{
@@ -109,7 +122,7 @@
       box-shadow: 0 2px 0 var(--green2);
       border-radius: 10px;
       padding: 7px 12px;
-      font-size: 18px;
+      font-size: 19px;
       letter-spacing: .06em;
       white-space: nowrap;
     }
@@ -147,8 +160,8 @@
       background: var(--soft);
       border: 4px solid var(--ink);
       border-radius: var(--radius);
-      box-shadow: 0 6px 0 var(--ink);
-      padding: 14px;
+      box-shadow: 0 6px 0 var(--ink), 0 12px 24px rgba(26,61,47,0.15);
+      padding: 16px;
       animation: slideIn .5s ease .1s forwards;
       opacity:0;
       transform: translateX(-10px);
@@ -206,19 +219,19 @@ box-shadow: 0 3px 0 var(--green),
       background: var(--soft);
       border: 4px solid var(--ink);
       border-radius: var(--radius);
-      box-shadow: 0 6px 0 var(--ink), 0 18px 40px var(--shadow);
+      box-shadow: 0 6px 0 var(--ink), 0 16px 40px var(--shadow);
       overflow:hidden;
       scroll-margin-top: 96px;
     }
     .windowTop{
       background: var(--green2);
       color:#fff;
-      padding: 12px 16px;
+      padding: 14px 18px;
       display:flex;
       align-items:center;
       justify-content: space-between;
       gap: 10px;
-      border-bottom: 2px solid rgba(0,0,0,.12);
+      border-bottom: 3px solid rgba(0,0,0,.2);
     }
     .windowTopLeft{
       display:flex;
@@ -228,16 +241,17 @@ box-shadow: 0 3px 0 var(--green),
       letter-spacing: .08em;
     }
     .windowBody{
-      padding: 18px 18px 18px;
-      font-size: 22px;
-      line-height: 1.35;
+      padding: 22px 26px 22px;
+      font-size: 23px;
+      line-height: 1.5;
     }
     .bigTitle{
       text-align:center;
-      font-size: 45px;
+      font-size: 48px;
       color: var(--green2);
       letter-spacing: .10em;
-      margin: 6px 0 14px;
+      margin: 8px 0 18px;
+      text-shadow: 1px 1px 0 rgba(58,124,74,0.2);
     }
     .main-title {
       text-align:center;
@@ -247,32 +261,49 @@ box-shadow: 0 3px 0 var(--green),
       margin: 6px 0 14px; 
     }
 
-    .cardList{ display:grid; gap: 12px; }
+    .cardList{ display:grid; gap: 16px; }
     .miniCard{
-  border: 2px solid var(--green2);
-  border-radius: 18px;
-  background: rgba(255,255,255,.66);
-  padding: 14px;
-  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
-
+  border: 3px solid var(--green2);
+  border-radius: 16px;
+  background: var(--card-bg);
+  padding: 18px 20px;
+  transition: transform .16s ease, box-shadow .16s ease;
   box-shadow:
-    0 3px 0 var(--green2),
-    inset 0 1px 0 rgba(255,255,255,.65);
+    0 4px 0 var(--green2),
+    0 8px 20px rgba(58,124,74,0.15);
+}
+
+.miniCard ul{
+  margin-top: 10px;
+  padding-left: 26px;
+}
+
+.miniCard li{
+  margin-bottom: 7px;
+  line-height: 1.5;
+}
+
+.miniCard .meta{
+  margin-top: 5px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  font-size: 21px;
+  font-style: italic;
 }
 
 .miniCard:hover{
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow:
     0 6px 0 var(--green2),
-    inset 0 1px 0 rgba(255,255,255,.7);
+    0 12px 28px rgba(58,124,74,0.25);
 }
 
     .badge{
       display:inline-block;
       border:2px solid var(--ink);
       border-radius: 10px;
-      padding: 2px 10px;
-      font-size: 18px;
+      padding: 3px 10px;
+      font-size: 19px;
       margin-left: 8px;
       vertical-align: middle;
     }
@@ -292,19 +323,22 @@ a:hover{
       display:flex;
       flex-wrap:wrap;
       justify-content:center;
-      gap: 10px;
-      margin-top: 6px;
+      gap: 12px;
+      margin-top: 10px;
     }
     .skill{
-      border: 2px solid var(--green2);
-      background: var(--bg);
+      border: 3px solid var(--green2);
+      background: var(--soft);
       box-shadow: 0 3px 0 var(--green2);
-      border-radius: 14px;
-      padding: 8px 14px;
-      font-size: 20px;
-      transition: transform .16s ease;
+      border-radius: 12px;
+      padding: 9px 15px;
+      font-size: 21px;
+      transition: transform .16s ease, background .16s ease;
     }
-    .skill:hover{ transform: translateY(-5px); }
+    .skill:hover{ 
+      transform: translateY(-4px); 
+      background: var(--bg);
+    }
 
     .contactGrid{
       display:grid;
@@ -317,19 +351,22 @@ a:hover{
     }
     .contactCard{
       border: 4px solid var(--ink);
-      border-radius: 18px;
-      padding: 14px;
+      border-radius: 16px;
+      padding: 18px 20px;
       text-align:center;
-      box-shadow: 0 4px 0 var(--ink);
-      transition: transform .16s ease;
+      box-shadow: 0 5px 0 var(--ink), 0 10px 20px rgba(26,61,47,0.15);
+      transition: transform .16s ease, box-shadow .16s ease;
       text-decoration:none;
       display:block;
     }
-    .contactCard:hover{ transform: translateY(-4px); }
+    .contactCard:hover{ 
+      transform: translateY(-3px); 
+      box-shadow: 0 7px 0 var(--ink), 0 14px 28px rgba(26,61,47,0.25);
+    }
     .contactCard.soft{ background: var(--soft); }
-    .contactCard.bg{ background: var(--bg); }
-    .contactTitle{ font-size: 28px; letter-spacing:.08em; }
-    .contactText{ font-size: 20px; margin-top: 6px; text-decoration: underline dotted; }
+    .contactCard.bg{ background: var(--card-bg); }
+    .contactTitle{ font-size: 29px; letter-spacing:.08em; margin-bottom: 6px; font-weight: bold; }
+    .contactText{ font-size: 21px; margin-top: 6px; text-decoration: underline dotted; }
 
     .footer{
       text-align:center;
@@ -401,6 +438,7 @@ a:hover{
         { id:"experience", label:"Experience"},
         { id:"projects", label:"Projects"},
         { id:"skills", label:"Skills"},
+        { id:"involvement", label:"Involvement"},
         { id:"contact", label:"Contact"},
       ]), []);
 
@@ -414,92 +452,124 @@ a:hover{
 
       const skills = [
         "Python","C++","C#","JavaScript","HTML","CSS","SQL",
-        "Power BI","Canva","Adobe Creative Suite","Digital Marketing",
-        "Social Media Marketing","Russian (conversational)"
+        "Bootstrap","Three.js","Power BI","Canva","Adobe Creative Suite",
+        "Digital Marketing","Social Media Marketing","Russian (conversational)"
+      ];
+
+      const certifications = [
+        "Social Media Marketing Professional Certificate - Hootsuite",
+        "Design User Experiences with Figma - LinkedIn Learning",
+        "Psychology Fundamentals for Marketing & Sales - LinkedIn Learning"
       ];
 
       const experiences = [
         {
-          title:"Associate, Content Specialist — SOLV Digital",
-          meta:"Jan 2026 – Present · Gainesville, FL · Part-time",
-          bullets:["Up-and-coming!"]
+          title:"Web Developer - Swamp Records",
+          meta:"Jan 2026 - Present | Gainesville, FL | Part-time",
+          bullets:["Collaborate with team members to create responsive, user-friendly web applications"]
         },
         {
-          title:"Content Specialist — SOLV Digital",
-          meta:"Nov 2025 – Dec 2025 · Gainesville, FL · Part-time",
-          bullets:["Created digital content for social and web, supporting campaigns with clear goals and consistent messaging."]
-        },
-        {
-          title:"Social Media & Marketing Manager — Golden Egg Café",
-          meta:"Jul 2025 – Present · Tampa, FL · Part-time",
+          title:"Associate, Content Specialist - SOLV Digital",
+          meta:"Jan 2026 - Present | Gainesville, FL | Part-time",
           bullets:[
-            "Manage the @golden.eggcafe Instagram and associated digital platforms.",
-            "Create visual content using photography and Canva to support consistent brand design and aesthetics.",
-            "Increased account reach by 190% through data-informed content strategy and platform optimization."
-          ],
-        },
-        {
-          title:"Math Tutor — Mathnasium Learning Center",
-          meta:"May 2022 – Aug 2022 · Tampa, FL",
-          bullets:[
-            "Provided personalized math tutoring for students K–12.",
-            "Supported measurable improvement through individualized learning plans and consistent feedback."
+            "Develop and execute content strategies informed by performance metrics, engagement trends, and platform analytics",
+            "Analyze content performance (reach, engagement, interactions) to refine strategy and improve campaign effectiveness",
+            "Collaborate with cross-functional teams to translate insights into actionable content recommendations"
           ]
         },
         {
-          title:"Server — Sushi Cafe",
-          meta:"Jul 2021 – Jun 2023 · Tampa, FL",
+          title:"Content Specialist - SOLV Digital",
+          meta:"Nov 2025 - Dec 2025 | Gainesville, FL | Part-time",
+          bullets:["Created digital content for social and web, supporting campaigns with clear goals and consistent messaging"]
+        },
+        {
+          title:"Social Media & Marketing Manager - Golden Egg Café",
+          meta:"Jul 2025 - Present | Tampa, FL | Part-time",
           bullets:[
-            "Delivered high-quality service in a fast-paced, high-volume environment.",
-            "Built strong conflict-resolution and customer service skills."
+            "Manage the @golden.eggcafe Instagram and associated digital platforms",
+            "Create branded visual content using photography and Canva to maintain consistent visual identity",
+            "Increased account reach by 190% through data-informed content strategy and platform optimization"
           ]
         },
         {
-          title:"Server — Applebee’s",
-          meta:"Feb 2024 – May 2024 · Gainesville, FL",
-          bullets:["Managed high-volume service while balancing multitasking, teamwork, and time management."]
+          title:"Math Tutor - Mathnasium Learning Center",
+          meta:"May 2022 - Aug 2022 | Tampa, FL",
+          bullets:[
+            "Provided personalized math tutoring for students K-12",
+            "Led an average score improvement of around 30% across students of all grades"
+          ]
+        },
+        {
+          title:"Server - Sushi Cafe",
+          meta:"Jul 2021 - Jun 2023 | Tampa, FL",
+          bullets:[
+            "Delivered high-quality service in a fast-paced, high-volume environment",
+            "Built strong conflict-resolution and customer service skills"
+          ]
+        },
+        {
+          title:"Server - Applebee's",
+          meta:"Feb 2024 - May 2024 | Gainesville, FL",
+          bullets:["Managed high-volume service while balancing multitasking, teamwork, and time management"]
         }
       ];
 
       const projects = [
         {
-          title: "Florida Medical Doctor Search",
-	  meta: "Full-Stack Web App · SQL Server + C# · Dec 2025 - Jan 2026",
-	  link: "https://floridamedsearch.com/",
- 	  bullets: [
-   	 "Built a full-stack tool that helps users find Florida doctors based on real procedural experience data",
-   	 "Supports procedure search with filtering by county or ZIP code (including radius search) for both outpatient (CPT) and inpatient 	  (ICD-10) records.",
-    	 "Designed to make complex healthcare data more accessible for people making high-stakes medical decisions."
- 	 ],
-	},
-	{
- 	 title: "Tetris",
- 	 meta: "Python + Pygame · Jan 2026",
- 	 link: "https://github.com/alicekrupitsky/Tetris",
- 	 bullets: [
-  	  "Built an executable Tetris game using Python and Pygame.",
-	  "Features scoring and leveling with increasing speed, wall kicks, and pause/restart controls."
- 	 ],
-	},
+          title: "NeuroView",
+          meta: "Frontend Lead | SwampHacks XI Winner (Best User Design) | Jan 2026",
+          link: "https://devpost.com/software/neuroview",
+          bullets: [
+            "Led frontend architecture and development of a real-time, open-source 3D brain MRI viewer",
+            "Developed interactive 3D visualization features including synchronized multi-plane slicing and annotation using Three.js",
+            "Designed and implemented the product UI and landing page, contributing to a Best User Design award at SwampHacks XI",
+            "Built WebSocket-based collaboration infrastructure enabling live shared sessions for up to 4 concurrent users"
+          ]
+        },
         {
-        title:"Website for David D. Friedman",
-        meta:"Frontend Development · HTML/CSS · Mar 2020",
-        link:"http://www.daviddfriedman.com/",
-        bullets:[
-          "Designed and deployed a personal website for economist David D. Friedman.",
-          "Self-taught HTML/CSS to create a clean, professional, responsive design.",
-          "Strengthened independent problem-solving and client communication skills."
-        ],
-      },
+          title: "Florida Medical Doctor Search",
+          meta: "Founder & Developer | Dec 2025 - Jan 2026",
+          link: "https://floridamedsearch.com/",
+          bullets: [
+            "Built a full-stack web application that enables users to identify doctors based on real procedural experience",
+            "Designed and managed a relational SQL database using large Florida healthcare datasets (CPT, ICD-10, license data)",
+            "Implemented advanced search features including procedure lookup and geographic filtering (county + ZIP radius)",
+            "Developed the application using C#, SQL, HTML, CSS, JavaScript, and Bootstrap"
+          ]
+        },
+        {
+          title: "Tetris",
+          meta: "Python + Pygame | Jan 2026",
+          link: "https://github.com/alicekrupitsky/Tetris",
+          bullets: [
+            "Built an executable Tetris game using Python and Pygame",
+            "Features scoring and leveling with increasing speed, wall kicks, and pause/restart controls"
+          ]
+        },
+        {
+          title:"Website for David D. Friedman",
+          meta:"Frontend Developer | Mar 2020",
+          link:"http://www.daviddfriedman.com/",
+          bullets:[
+            "Designed and deployed a personal website for economist David D. Friedman using HTML and CSS",
+            "Strengthened independent problem-solving and client communication skills"
+          ]
+        },
         {
           title:"Golden Egg Café Instagram Content",
-          meta:"Content strategy + Canva design",
+          meta:"Content strategy + Canva design | Ongoing",
           bullets:[
-            "Designed promotional posts and campaign graphics with strong visual hierarchy and readability.",
-            "Wrote clear, on-brand copy aligned with the café’s tone and customer expectations.",
-            "Used performance data to refine what content formats and messages work best."
-          ],
+            "Designed promotional posts and campaign graphics with strong visual hierarchy and readability",
+            "Wrote clear, on-brand copy aligned with the café's tone and customer expectations",
+            "Used performance data to refine what content formats and messages work best"
+          ]
         }
+      ];
+
+      const involvement = [
+        "Computing Student Union (CSU) — Creative & Marketing Director",
+        "Data Science & Informatics (DSI) Student Organization — Member",
+        "UF Girls Who Code — Member"
       ];
 
       return (
@@ -515,7 +585,7 @@ a:hover{
             </div>
             <div className="headerBottom">
               <div className="main-title">
-          Advertising Major &amp; Computer Science Minor &middot; AI Fundamentals Certificate &middot; University of Florida
+          Advertising Major & Computer Science Minor | AI Fundamentals Certificate | University of Florida
         </div>
             </div>
           </div>
@@ -537,14 +607,15 @@ a:hover{
                 </div>
 
                 <div style={{
-                  marginTop: 12,
+                  marginTop: 14,
                   borderRadius: 14,
-                  border: "2px solid var(--green2)",
-                  background: "var(--bg)",
-                  padding: 12,
-                  fontSize: 18
+                  border: "3px solid var(--green2)",
+                  background: "var(--card-bg)",
+                  padding: 14,
+                  fontSize: 20,
+                  boxShadow: "0 3px 0 var(--green2)"
                 }}>
-                  <div style={{textAlign:"center", letterSpacing:".14em"}}>Quick Links</div>
+                  <div style={{textAlign:"center", letterSpacing:".14em", marginBottom: 8, fontWeight: "bold"}}>Quick Links</div>
                   <div style={{marginTop: 6, display:"flex", flexWrap:"wrap", gap:8, justifyContent:"center"}}>
   		    <a href="mailto:akrupitsky@ufl.edu">Email ↗</a>
   		    <span style={{opacity:.6}}>·</span>
@@ -557,14 +628,14 @@ a:hover{
               </div>
             </aside>
 
-            <main style={{display:"grid", gap: 18}}>
+            <main style={{display:"grid", gap: 22}}>
               <Window id="about" title="About Me">
                 <div className="bigTitle">Welcome to my portfolio!</div>
                 <p>
-                  Hi, I’m Alice Krupitsky, a third-year student at the University of Florida studying Advertising with a minor in Computer Science and an AI Fundamentals Certificate. I’m instinctively drawn to creativity, while also deeply interested in the technology and data behind the scenes.
+                  Hi, I'm Alice Krupitsky, a third-year student at the University of Florida studying Advertising with a minor in Computer Science and an AI Fundamentals Certificate. I'm instinctively drawn to creativity, while also deeply interested in the technology and data behind the scenes.
                 </p>
                 <p>
-                 I grew up in a Russian household in Tampa, which naturally shaped my curiosity about culture, language, and the ways communication influences how people think and connect. I’ve always loved that no two people share the exact same perspective. I see it as an opportunity to explore, learn, and better understand how meaning is created.
+                 I grew up in a Russian household in Tampa, which naturally shaped my curiosity about culture, language, and the ways communication influences how people think and connect. I've always loved that no two people share the exact same perspective. I see it as an opportunity to explore, learn, and better understand how meaning is created.
                </p>
                <p>
                  Outside of work and school, my interests range from language learning, fashion (from observing to creating), philosophy, coding, graphic design, psychology, writing, weight lifting, swimming, and going on runs.
@@ -576,9 +647,9 @@ a:hover{
 
               <Window id="experience" title="Experience">
                 <div className="cardList">
-                  {experiences.map(exp => (
-                    <div key={exp.title} className="miniCard">
-                      <div style={{fontSize: 26, fontWeight: "bold", letterSpacing: ".04em"}}>
+                  {experiences.map((exp, idx) => (
+                    <div key={idx} className="miniCard">
+                      <div style={{fontSize: 25, fontWeight: "bold", letterSpacing: ".04em"}}>
                         {exp.title}
                         {exp.highlight ? <span className="badge yellow">{exp.highlight}</span> : null}
                       </div>
@@ -593,9 +664,9 @@ a:hover{
 
               <Window id="projects" title="Projects">
   <div className="cardList">
-    {projects.map(p => (
-      <div key={p.title} className="miniCard">
-        <div style={{fontSize: 26, fontWeight: "bold", letterSpacing: ".04em"}}>
+    {projects.map((p, idx) => (
+      <div key={idx} className="miniCard">
+        <div style={{fontSize: 25, fontWeight: "bold", letterSpacing: ".04em"}}>
           {p.link ? (
             <a href={p.link} target="_blank" rel="noopener noreferrer">
               {p.title} ↗
@@ -624,11 +695,12 @@ a:hover{
               style={{
                 border: "2px solid var(--ink)",
                 borderRadius: "10px",
-                padding: "2px 10px",
+                padding: "3px 10px",
                 background: "var(--bg)",
                 boxShadow: "0 2px 0 var(--green2)",
                 textDecoration: "none",
-                whiteSpace: "nowrap"
+                whiteSpace: "nowrap",
+                fontSize: "19px"
               }}
             >
               Visit Site ↗
@@ -648,10 +720,29 @@ a:hover{
                 <div className="skills">
                   {skills.map(s => <div key={s} className="skill">{s}</div>)}
                 </div>
+                
+                <div style={{marginTop: 26, paddingTop: 20, borderTop: "3px solid var(--green2)"}}>
+                  <div style={{textAlign:"center", fontSize: 30, fontWeight:"bold", color:"var(--green2)", letterSpacing:".08em", marginBottom: 14}}>
+                    Certifications
+                  </div>
+                  <ul style={{maxWidth: 700, margin:"0 auto", lineHeight: 1.5}}>
+                    {certifications.map((cert, idx) => (
+                      <li key={idx} style={{marginBottom: 9}}>{cert}</li>
+                    ))}
+                  </ul>
+                </div>
+              </Window>
+
+              <Window id="involvement" title="Campus Involvement">
+                <ul style={{fontSize: 23, lineHeight: 1.5, paddingLeft: 26}}>
+                  {involvement.map((item, idx) => (
+                    <li key={idx} style={{marginBottom: 9}}>{item}</li>
+                  ))}
+                </ul>
               </Window>
 
               <Window id="contact" title="Connect.EXE">
-                <div className="bigTitle">Want to work together?<br/>Let’s chat!</div>
+                <div className="bigTitle">Want to work together?<br/>Let's chat!</div>
 
                 <div className="contactGrid">
                   <a className="contactCard bg" href="mailto:akrupitsky@ufl.edu">

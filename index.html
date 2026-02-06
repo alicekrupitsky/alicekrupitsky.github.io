@@ -116,16 +116,6 @@
 .windowBody{
   letter-spacing: .02em;
 }
-    .pill{
-      border: 2px solid var(--green2);
-      background: var(--bg);
-      box-shadow: 0 2px 0 var(--green2);
-      border-radius: 10px;
-      padding: 7px 12px;
-      font-size: 19px;
-      letter-spacing: .06em;
-      white-space: nowrap;
-    }
     .headerBtns{
       margin-top: 16px;
       display:flex;
@@ -133,22 +123,6 @@
       justify-content:center;
       flex-wrap:wrap;
     }
-    .btn{
-      cursor:pointer;
-      font-family:'VT323', monospace;
-      font-size: 20px;
-      border-radius: 14px;
-      border: 2px solid var(--ink);
-      padding: 10px 14px;
-      letter-spacing: .06em;
-      box-shadow: 0 3px 0 var(--ink);
-      transition: transform .12s ease, filter .12s ease;
-      user-select:none;
-    }
-    .btn:active{ transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
-    .btn.primary{ background: var(--green2); color:#fff; }
-    .btn.ghost{ background: var(--soft); color: var(--ink); }
-    .btn:hover{ filter: brightness(1.03); }
 
     /* Nav */
     .navWrap{
@@ -249,16 +223,15 @@ box-shadow: 0 3px 0 var(--green),
       text-align:center;
       font-size: 48px;
       color: var(--green2);
-      letter-spacing: .10em;
-      margin: 8px 0 18px;
+      margin: 5px 0 10px;
       text-shadow: 1px 1px 0 rgba(58,124,74,0.2);
     }
     .main-title {
       text-align:center;
-      font-size: 35px;
+      font-size: 39px;
       color: var(--green2);
-      letter-spacing: .10em;
-      margin: 6px 0 14px; 
+      letter-spacing: .05em;
+      margin: 5px 0 5px; 
     }
 
     .cardList{ display:grid; gap: 16px; }
@@ -339,6 +312,39 @@ a:hover{
       transform: translateY(-4px); 
       background: var(--bg);
     }
+    .skill.sandbox-mode{
+      position: absolute;
+      transition: none;
+      cursor: grab;
+    }
+    .skill.sandbox-mode:active{
+      cursor: grabbing;
+    }
+    .skillsSandbox{
+      position: relative;
+      min-height: 400px;
+      background: var(--card-bg);
+      border: 2px dashed var(--green2);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .sandboxPlayBtn{
+      cursor:pointer;
+      font-family:'VT323', monospace;
+      font-size: 22px;
+      font-weight: bold;
+      border-radius: 12px;
+      border: 3px solid #fff;
+      padding: 10px 18px;
+      letter-spacing: .08em;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.4), 0 0 20px rgba(53, 122, 75, 0.6);
+      transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+      user-select:none;
+      background: var(--green);
+      color: #fff;
+    }
+    .sandboxPlayBtn:active{ transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.4), 0 0 15px rgba(53, 122, 75, 0.6); }
+    .sandboxPlayBtn:hover{ filter: brightness(1.15); box-shadow: 0 4px 0 rgba(0,0,0,0.4), 0 0 25px rgba(53, 122, 75, 0.8); }
 
     .contactGrid{
       display:grid;
@@ -432,6 +438,174 @@ a:hover{
       );
     }
 
+    function SkillsWindow({ skills, certifications }){
+      const [isSandbox, setIsSandbox] = useState(false);
+      const [skillsState, setSkillsState] = useState(skills.map(s => ({
+        name: s,
+        x: Math.random() * 200,
+        y: Math.random() * 50,
+        vx: 0,
+        vy: 0
+      })));
+      const containerRef = React.useRef(null);
+      const draggedRef = React.useRef(null);
+      const offsetRef = React.useRef({x: 0, y: 0});
+
+      // Physics simulation
+      useEffect(() => {
+        if (!isSandbox) return;
+
+        const interval = setInterval(() => {
+          setSkillsState(prev => {
+            const container = containerRef.current;
+            if (!container) return prev;
+
+            const containerHeight = container.clientHeight;
+            const containerWidth = container.clientWidth;
+
+            return prev.map(skill => {
+              let {x, y, vx, vy} = skill;
+              
+              // Apply gravity
+              vy += 0.3;
+              
+              // Apply friction
+              vx *= 0.99;
+              vy *= 0.99;
+
+              // Update position
+              x += vx;
+              y += vy;
+
+              // Boundary collision
+              if (y + 50 >= containerHeight) {
+                y = containerHeight - 50;
+                vy *= -0.6;
+              }
+              if (x < 0) {
+                x = 0;
+                vx *= -0.6;
+              }
+              if (x + 140 > containerWidth) {
+                x = containerWidth - 140;
+                vx *= -0.6;
+              }
+
+              return {...skill, x, y, vx, vy};
+            });
+          });
+        }, 30);
+
+        return () => clearInterval(interval);
+      }, [isSandbox]);
+
+      const handleMouseDown = (e, skillName) => {
+        if (!isSandbox) return;
+        e.preventDefault();
+        draggedRef.current = skillName;
+        const rect = containerRef.current.getBoundingClientRect();
+        const skill = skillsState.find(s => s.name === skillName);
+        if (skill) {
+          offsetRef.current = {
+            x: e.clientX - rect.left - skill.x,
+            y: e.clientY - rect.top - skill.y
+          };
+        }
+      };
+
+      const handleMouseMove = (e) => {
+        if (!draggedRef.current || !containerRef.current) return;
+        
+        const rect = containerRef.current.getBoundingClientRect();
+        const newX = e.clientX - rect.left - offsetRef.current.x;
+        const newY = e.clientY - rect.top - offsetRef.current.y;
+
+        setSkillsState(prev => prev.map(s => 
+          s.name === draggedRef.current 
+            ? {...s, x: Math.max(0, Math.min(newX, rect.width - 140)), y: Math.max(0, Math.min(newY, rect.height - 50)), vx: 0, vy: 0}
+            : s
+        ));
+      };
+
+      const handleMouseUp = () => {
+        draggedRef.current = null;
+      };
+
+      const toggleSandbox = () => {
+        setIsSandbox(!isSandbox);
+        if (!isSandbox) {
+          // Reset positions when entering sandbox - scattered and random
+          setSkillsState(skills.map((s, i) => ({
+            name: s,
+            x: Math.random() * 400,
+            y: Math.random() * 100,
+            vx: (Math.random() - 0.5) * 3,
+            vy: (Math.random() - 0.5) * 3
+          })));
+        }
+      };
+
+      return (
+        <section className="window" id="skills">
+          <div className="windowTop">
+            <div className="windowTopLeft">
+              <div><strong>Installed Programs</strong></div>
+            </div>
+            <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+              <button 
+                className="sandboxPlayBtn" 
+                onClick={toggleSandbox}
+                title={isSandbox ? 'Click to stop sandbox' : 'Click to activate sandbox'}
+              >
+                {isSandbox ? 'STOP' : 'PLAY'}
+              </button>
+            </div>
+          </div>
+          <div className="windowBody">
+            {isSandbox ? (
+              <div 
+                className="skillsSandbox"
+                ref={containerRef}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+              >
+                {skillsState.map(skill => (
+                  <div
+                    key={skill.name}
+                    className="skill sandbox-mode"
+                    style={{
+                      left: `${skill.x}px`,
+                      top: `${skill.y}px`,
+                      whiteSpace: 'nowrap'
+                    }}
+                    onMouseDown={(e) => handleMouseDown(e, skill.name)}
+                  >
+                    {skill.name}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="skills">
+                {skills.map(s => <div key={s} className="skill">{s}</div>)}
+              </div>
+            )}
+            
+            <div style={{marginTop: 26, paddingTop: 20, borderTop: "3px solid var(--green2)"}}>
+              <div style={{textAlign:"center", fontSize: 30, fontWeight:"bold", color:"var(--green2)", letterSpacing:".08em", marginBottom: 14}}>
+                Certifications
+              </div>
+              <ul style={{maxWidth: 700, margin:"0 auto", lineHeight: 1.5}}>
+                {certifications.map((cert, idx) => (
+                  <li key={idx} style={{marginBottom: 9}}>{cert}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
     function App(){
       const sections = useMemo(() => ([
         { id:"about", label:"About"},
@@ -470,17 +644,12 @@ a:hover{
         },
         {
           title:"Associate, Content Specialist - SOLV Digital",
-          meta:"Jan 2026 - Present | Gainesville, FL | Part-time",
+          meta:"Nov 2025 - Present | Gainesville, FL | Part-time",
           bullets:[
             "Develop and execute content strategies informed by performance metrics, engagement trends, and platform analytics",
             "Analyze content performance (reach, engagement, interactions) to refine strategy and improve campaign effectiveness",
             "Collaborate with cross-functional teams to translate insights into actionable content recommendations"
           ]
-        },
-        {
-          title:"Content Specialist - SOLV Digital",
-          meta:"Nov 2025 - Dec 2025 | Gainesville, FL | Part-time",
-          bullets:["Created digital content for social and web, supporting campaigns with clear goals and consistent messaging"]
         },
         {
           title:"Social Media & Marketing Manager - Golden Egg Café",
@@ -567,10 +736,10 @@ a:hover{
       ];
 
       const involvement = [
-        "Computing Student Union (CSU) — Creative & Marketing Director",
-        "Data Science & Informatics (DSI) Student Organization — Member",
-        "UF Girls Who Code — Member"
-      ];
+         { org: "Computing Student Union (CSU)", role: "Marketing Director", highlight: true },
+         { org: "Data Science & Informatics (DSI) Student Organization", role: "Member" },
+         { org: "UF Girls Who Code", role: "Member" }
+       ];
 
       return (
         <div className="page">
@@ -585,8 +754,8 @@ a:hover{
             </div>
             <div className="headerBottom">
               <div className="main-title">
-          Advertising Major & Computer Science Minor | AI Fundamentals Certificate | University of Florida
-        </div>
+          Advertising Major + CS Minor </div>
+            <div className="main-title"> University of Florida </div>
             </div>
           </div>
 
@@ -635,13 +804,13 @@ a:hover{
                   Hi, I'm Alice Krupitsky, a third-year student at the University of Florida studying Advertising with a minor in Computer Science and an AI Fundamentals Certificate. I'm instinctively drawn to creativity, while also deeply interested in the technology and data behind the scenes.
                 </p>
                 <p>
-                 I grew up in a Russian household in Tampa, which naturally shaped my curiosity about culture, language, and the ways communication influences how people think and connect. I've always loved that no two people share the exact same perspective. I see it as an opportunity to explore, learn, and better understand how meaning is created.
+                 I grew up in a Russian household in Tampa, which shaped my curiosity about culture, language, and communication. I’m fascinated by how different perspectives influence the way people interpret meaning, and I bring that awareness into how I think about audiences, messaging, and brand identity.
                </p>
                <p>
-                 Outside of work and school, my interests range from language learning, fashion (from observing to creating), philosophy, coding, graphic design, psychology, writing, weight lifting, swimming, and going on runs.
+                 Outside of work and school, I spend time learning languages, coding, writing, exploring fashion and visual design, and studying psychology. I’m drawn to disciplines that explain how people think, create, and connect.
                </p>
                <p>
-                 My long-term goal is to build a career that blends brand strategy, content creation, and technology. My advertising philosophy centers on data-driven creativity: while intuition can spark ideas, meaningful communication is strongest when the art of storytelling is supported by analytics and intentional strategy.
+                 My long-term goal is to build a career that blends brand strategy, content creation, and emerging technology. My advertising philosophy centers on data-driven creativity: intuition sparks ideas, but meaningful communication is strongest when storytelling is supported by analytics and intentional strategy.
                 </p>
               </Window>
 
@@ -716,29 +885,17 @@ a:hover{
   </div>
 </Window>
 
-              <Window id="skills" title="Installed Programs">
-                <div className="skills">
-                  {skills.map(s => <div key={s} className="skill">{s}</div>)}
-                </div>
-                
-                <div style={{marginTop: 26, paddingTop: 20, borderTop: "3px solid var(--green2)"}}>
-                  <div style={{textAlign:"center", fontSize: 30, fontWeight:"bold", color:"var(--green2)", letterSpacing:".08em", marginBottom: 14}}>
-                    Certifications
-                  </div>
-                  <ul style={{maxWidth: 700, margin:"0 auto", lineHeight: 1.5}}>
-                    {certifications.map((cert, idx) => (
-                      <li key={idx} style={{marginBottom: 9}}>{cert}</li>
-                    ))}
-                  </ul>
-                </div>
-              </Window>
+              <SkillsWindow skills={skills} certifications={certifications} />
 
               <Window id="involvement" title="Campus Involvement">
-                <ul style={{fontSize: 23, lineHeight: 1.5, paddingLeft: 26}}>
-                  {involvement.map((item, idx) => (
-                    <li key={idx} style={{marginBottom: 9}}>{item}</li>
+                 <ul style={{fontSize: 23, lineHeight: 1.5, paddingLeft: 26}}>
+                 {involvement.map((item, idx) => (
+                  <li key={idx} style={{marginBottom: 9}}>
+                    {item.org} —{" "}
+                    {item.highlight ? <strong>{item.role}</strong> : item.role}
+                  </li>
                   ))}
-                </ul>
+                 </ul>
               </Window>
 
               <Window id="contact" title="Connect.EXE">

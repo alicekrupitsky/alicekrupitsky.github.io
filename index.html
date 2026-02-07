@@ -376,11 +376,14 @@ a:hover{
 
     .footer{
       text-align:center;
-      font-size: 20px;
+      font-size: 25px;
       color: var(--green);
       letter-spacing: .12em;
       margin-top: 18px;
       padding-bottom: 10px;
+    }
+    .heart {
+      color: #3a7c4a;
     }
   </style>
 </head>
@@ -625,10 +628,12 @@ a:hover{
       };
 
       const skills = [
-        "Python","C++","C#","JavaScript","HTML","CSS","SQL",
-        "Bootstrap","Three.js","Power BI","Canva","Adobe Creative Suite",
-        "Digital Marketing","Social Media Marketing","Russian (conversational)"
-      ];
+  "Python","C++","C#","JavaScript","HTML/CSS","SQL",
+  "React","Git & GitHub","Bootstrap","Power BI","Excel",
+  "UI/UX Design","Figma", "LaTeX",
+  "Digital Marketing","Adobe Creative Suite","Canva",
+   "Russian (conversational)"
+];
 
       const certifications = [
         "Social Media Marketing Professional Certificate - Hootsuite",
@@ -919,7 +924,9 @@ a:hover{
                 </div>
               </Window>
 
-              <div className="footer">© 2025 Alice Krupitsky</div>
+              <div className="footer">
+                  Made with <span className="heart">♥</span> by Alice
+              </div>
             </main>
           </div>
         </div>

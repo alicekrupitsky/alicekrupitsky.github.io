@@ -448,11 +448,13 @@ a:hover{
         x: Math.random() * 200,
         y: Math.random() * 50,
         vx: 0,
-        vy: 0
+        vy: 0,
+        prevY: 0
       })));
       const containerRef = React.useRef(null);
       const draggedRef = React.useRef(null);
       const offsetRef = React.useRef({x: 0, y: 0});
+      const lastPosRef = React.useRef({x: 0, y: 0, t: 0});
 
       // Physics simulation
       useEffect(() => {
@@ -463,16 +465,15 @@ a:hover{
             const container = containerRef.current;
             if (!container) return prev;
 
+            const SKILL_W = 140;
+            const SKILL_H = 50;
             const containerHeight = container.clientHeight;
             const containerWidth = container.clientWidth;
-
             return prev.map(skill => {
-              let {x, y, vx, vy} = skill;
-              
-              // Apply gravity
+              let {x, y, vx, vy, prevY} = skill;
+
+              // Apply gravity and friction
               vy += 0.3;
-              
-              // Apply friction
               vx *= 0.99;
               vy *= 0.99;
 
@@ -480,21 +481,28 @@ a:hover{
               x += vx;
               y += vy;
 
-              // Boundary collision
-              if (y + 50 >= containerHeight) {
-                y = containerHeight - 50;
-                vy *= -0.6;
-              }
+              const skillRight = x + SKILL_W;
+              const skillBottom = y + SKILL_H;
+
+              // Keep skills inside game territory
               if (x < 0) {
                 x = 0;
-                vx *= -0.6;
+                vx *= -0.7;
               }
-              if (x + 140 > containerWidth) {
-                x = containerWidth - 140;
-                vx *= -0.6;
+              if (skillRight > containerWidth) {
+                x = containerWidth - SKILL_W;
+                vx *= -0.7;
+              }
+              if (y < 0) {
+                y = 0;
+                vy *= -0.7;
+              }
+              if (skillBottom > containerHeight) {
+                y = containerHeight - SKILL_H;
+                vy *= -0.7;
               }
 
-              return {...skill, x, y, vx, vy};
+              return {...skill, x, y, vx, vy, prevY: y};
             });
           });
         }, 30);
@@ -513,6 +521,7 @@ a:hover{
             x: e.clientX - rect.left - skill.x,
             y: e.clientY - rect.top - skill.y
           };
+          lastPosRef.current = {x: skill.x, y: skill.y, t: performance.now()};
         }
       };
 
@@ -523,9 +532,24 @@ a:hover{
         const newX = e.clientX - rect.left - offsetRef.current.x;
         const newY = e.clientY - rect.top - offsetRef.current.y;
 
-        setSkillsState(prev => prev.map(s => 
-          s.name === draggedRef.current 
-            ? {...s, x: Math.max(0, Math.min(newX, rect.width - 140)), y: Math.max(0, Math.min(newY, rect.height - 50)), vx: 0, vy: 0}
+        let clampedX = Math.max(0, Math.min(newX, rect.width - 140));
+        let clampedY = Math.max(0, Math.min(newY, rect.height - 50));
+
+        const now = performance.now();
+        const last = lastPosRef.current;
+        const dt = Math.max(16, now - last.t);
+        lastPosRef.current = {x: clampedX, y: clampedY, t: now};
+
+        setSkillsState(prev => prev.map(s =>
+          s.name === draggedRef.current
+            ? {
+              ...s,
+              x: clampedX,
+              y: clampedY,
+              vx: (clampedX - last.x) / dt * 25,
+              vy: (clampedY - last.y) / dt * 25,
+              prevY: clampedY
+            }
             : s
         ));
       };
@@ -543,7 +567,8 @@ a:hover{
             x: Math.random() * 400,
             y: Math.random() * 100,
             vx: (Math.random() - 0.5) * 3,
-            vy: (Math.random() - 0.5) * 3
+            vy: (Math.random() - 0.5) * 3,
+            prevY: Math.random() * 100
           })));
         }
       };
